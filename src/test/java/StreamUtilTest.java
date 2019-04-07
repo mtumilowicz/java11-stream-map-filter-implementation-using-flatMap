@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,8 +42,43 @@ public class StreamUtilTest {
     }
 
     @Test
-    public void filter() {
-        assertThat(StreamUtil.filter(Stream.of(2), x -> x > 1).findAny(), is(Optional.of(2)));
-        assertThat(StreamUtil.filter(Stream.of(2), x -> x > 2).findAny(), is(Optional.empty()));
+    public void filter_empty() {
+        assertThat(StreamUtil.filter(Stream.<Integer>empty(), x -> x > 2).count(), is(0L));
+    }
+
+    @Test
+    public void filter_single_true() {
+//        given
+        var ints = Stream.of(2);
+
+//        when
+        var filtered = StreamUtil.filter(ints, x -> x < 3).collect(Collectors.toList());
+
+//        expect
+        assertThat(filtered, is(List.of(2)));
+    }
+
+    @Test
+    public void filter_single_false() {
+//        given
+        var ints = Stream.of(2);
+
+//        when
+        var filtered = StreamUtil.filter(ints, x -> x > 2).collect(Collectors.toList());
+
+//        expect
+        assertThat(filtered, is(List.of()));
+    }
+
+    @Test
+    public void filter_multiple() {
+//        given
+        var ints = Stream.of(1, 2, 3);
+
+//        when
+        var filtered = StreamUtil.filter(ints, x -> x > 2).collect(Collectors.toList());
+
+//        expect
+        assertThat(filtered, is(List.of(3)));
     }
 }
