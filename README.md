@@ -52,3 +52,78 @@ https://github.com/mtumilowicz/java11-stream-map-filter-implementation-using-red
         return stream.flatMap(x -> predicate.test(x) ? Stream.of(x) : Stream.empty());
     }
     ```
+# tests
+* `map`
+    ```
+    @Test
+    public void map_empty() {
+        assertThat(StreamUtil.map(Stream.<Integer>empty(), x -> x * x).count(), is(0L));
+    }
+    
+    @Test
+    public void map_single() {
+        // given
+        var ints = Stream.of(2);
+    
+        // when
+        var squared = StreamUtil.map(ints, x -> x * x).collect(Collectors.toList());
+    
+        // expect
+        assertThat(squared, is(List.of(4)));
+    }    
+    
+    @Test
+    public void map_multiple() {
+        // given
+        var ints = Stream.of(1, 2, 3);
+        
+        // when
+        var squared = StreamUtil.map(ints, x -> x * x).collect(Collectors.toList());
+        
+        // expect
+        assertThat(squared, is(List.of(1, 4, 9)));
+    }
+    ```
+* `filter`
+    ```
+    @Test
+    public void filter_empty() {
+        assertThat(StreamUtil.filter(Stream.<Integer>empty(), x -> x > 2).count(), is(0L));
+    }
+    
+    @Test
+    public void filter_single_true() {
+        // given
+        var ints = Stream.of(2);
+    
+        // when
+        var filtered = StreamUtil.filter(ints, x -> x < 3).collect(Collectors.toList());
+    
+        // expect
+        assertThat(filtered, is(List.of(2)));
+    }
+    
+    @Test
+    public void filter_single_false() {
+        // given
+        var ints = Stream.of(2);
+    
+        // when
+        var filtered = StreamUtil.filter(ints, x -> x > 2).collect(Collectors.toList());
+    
+        // expect
+        assertThat(filtered, is(List.of()));
+    }
+    
+    @Test
+    public void filter_multiple() {
+        // given
+        var ints = Stream.of(1, 2, 3);
+    
+        // when
+        var filtered = StreamUtil.filter(ints, x -> x > 2).collect(Collectors.toList());
+    
+        // expect
+        assertThat(filtered, is(List.of(3)));
+    }
+    ```
