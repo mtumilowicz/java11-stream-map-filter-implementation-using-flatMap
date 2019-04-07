@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/java11-stream-map-filter-implementation-using-flatMap.svg?branch=master)](https://travis-ci.com/mtumilowicz/java11-stream-map-filter-implementation-using-flatMap)
+
 # java11-stream-map-filter-implementation-using-flatMap
 
 # flatMap in a nutshell
