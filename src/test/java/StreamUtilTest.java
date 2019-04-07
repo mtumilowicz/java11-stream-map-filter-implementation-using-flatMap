@@ -3,8 +3,9 @@ import org.junit.Test;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 /**
  * Created by mtumilowicz on 2019-04-06.
  */
@@ -13,7 +14,7 @@ public class StreamUtilTest {
     @Test
     public void map() {
         assertThat(StreamUtil.map(Stream.of(2), x -> x * x).findAny(), is(Optional.of(4)));
-        
+
     }
 
     @Test
