@@ -40,4 +40,15 @@
 # project description
 * it may be valuable to take a look at: 
 https://github.com/mtumilowicz/java11-stream-map-filter-implementation-using-reduce
-* 
+* `map` implementation using `flatMap`
+    ```
+    static <T, R> Stream<R> map(Stream<T> stream, Function<T, R> mapper) {
+        return stream.flatMap(mapper.andThen(Stream::of));
+    }
+    ```
+* `filter` implementation using `flatMap`
+    ```
+    static <T> Stream<T> filter(Stream<T> stream, Predicate<T> predicate) {
+        return stream.flatMap(x -> predicate.test(x) ? Stream.of(x) : Stream.empty());
+    }
+    ```
