@@ -1,6 +1,8 @@
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -12,9 +14,32 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class StreamUtilTest {
 
     @Test
-    public void map() {
-        assertThat(StreamUtil.map(Stream.of(2), x -> x * x).findAny(), is(Optional.of(4)));
+    public void map_empty() {
+        assertThat(StreamUtil.map(Stream.<Integer>empty(), x -> x * x).count(), is(0L));
+    }
 
+    @Test
+    public void map_single() {
+//        given
+        var ints = Stream.of(2);
+
+//        when
+        var squared = StreamUtil.map(ints, x -> x * x).collect(Collectors.toList());
+
+//        expect
+        assertThat(squared, is(List.of(4)));
+    }    
+    
+    @Test
+    public void map_multiple() {
+//        given
+        var ints = Stream.of(1, 2, 3);
+        
+//        when
+        var squared = StreamUtil.map(ints, x -> x * x).collect(Collectors.toList());
+        
+//        expect
+        assertThat(squared, is(List.of(1, 4, 9)));
     }
 
     @Test
