@@ -25,8 +25,8 @@
     assertThat(maybeInt, is(Optional.of(1)));
     assertThat(emptyInt, IsSame.sameInstance(Optional.empty()));
     ```
-* contrary to map (which introduces one to one correspondence)
-    flatMap could change the number of elements in the stream
+* contrary to `map` (which introduces one to one correspondence)
+    `flatMap` could change the number of elements in the stream
     ```
     // given
     Stream<Integer> triple = Stream.of(1, 2, 3);
