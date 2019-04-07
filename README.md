@@ -55,23 +55,23 @@ https://github.com/mtumilowicz/java11-stream-map-filter-implementation-using-red
 # tests
 * `map`
     ```
-    @Test
-    public void map_multiple() {
-        var ints = Stream.of(1, 2, 3);
-        
-        var squared = StreamUtil.map(ints, x -> x * x).collect(Collectors.toList());
-        
-        assertThat(squared, is(List.of(1, 4, 9)));
-    }
+    // given
+    var ints = Stream.of(1, 2, 3);
+    
+    // when
+    var squared = StreamUtil.map(ints, x -> x * x).collect(Collectors.toList());
+    
+    // then
+    assertThat(squared, is(List.of(1, 4, 9)));
     ```
 * `filter`
     ``` 
-    @Test
-    public void filter_multiple() {
-        var ints = Stream.of(1, 2, 3);
+    // given
+    var ints = Stream.of(1, 2, 3);
     
-        var filtered = StreamUtil.filter(ints, x -> x > 2).collect(Collectors.toList());
+    // when
+    var filtered = StreamUtil.filter(ints, x -> x > 2).collect(Collectors.toList());
     
-        assertThat(filtered, is(List.of(3)));
-    }
+    // then
+    assertThat(filtered, is(List.of(3)));
     ```
